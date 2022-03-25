@@ -9,7 +9,11 @@ namespace OrderDigest
         {
             var newVal = Encoding.ASCII.GetBytes(value);
             SHA256Managed sha256m = new SHA256Managed();
-            return Encoding.ASCII.GetString(sha256m.ComputeHash(newVal));
+            var res = sha256m.ComputeHash(newVal);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in res) { stringBuilder.AppendFormat("{0:X2}", b); }
+            return stringBuilder.ToString();
         }
     }
 }
